@@ -6,11 +6,14 @@ public class Player : MonoBehaviour
 {
     public Rigidbody rb;
     public float moveSpeed;
+    public float boostPower;
 
     float horizontalInput;
     float verticalInput;
 
     Vector3 moveDirection;
+
+    public Transform orientation;
 
     void Start()
     {
@@ -21,7 +24,20 @@ public class Player : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(moveDirection.normalized * boostPower, ForceMode.Impulse);
+
+        }
+
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+
     }
 }
