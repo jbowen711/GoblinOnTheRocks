@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Rigidbody rb;
+    public float moveSpeed;
+
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+        rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
     }
 }
