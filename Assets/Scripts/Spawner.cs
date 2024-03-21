@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    
-    public GameObject archer; // The object you want to spawn
-    public Transform spawnPoint; // The location where you want to spawn the objects
-    [SerializeField] float spawnTime = 10f; // The time interval between spawns
+
+    //First Spawner - Front
+    //Spawn variables
+    public GameObject archer;
+    public Transform spawnPoint; 
+    [SerializeField] float spawnTime = 10f; 
 
     private void Start()
     {
@@ -16,11 +18,12 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnObjects()
     {
-        while (true) // Infinite loop to continuously spawn objects
+        while (true) //Infinte Spawning - could slow down if there are too many
         {
+            //Instantiate spawner at spawnposition
             Instantiate(archer, spawnPoint.position, spawnPoint.rotation);
 
-            // Wait for the specified interval before spawning the next object
+            // Wait Spawn time
             yield return new WaitForSeconds(spawnTime);
         }
     }

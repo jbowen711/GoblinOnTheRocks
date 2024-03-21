@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Spawner2 : MonoBehaviour
 {
-    
-    public GameObject archer; // The object you want to spawn
-    public Transform spawnPoint; // The location where you want to spawn the objects
-    [SerializeField] float spawnTime = 10f; // The time interval between spawns
+    //Second Spawner - Backside
+    public GameObject archer; 
+    public Transform spawnPoint; 
+    [SerializeField] float spawnTime = 10f; 
 
     private void Start()
     {
@@ -20,8 +20,6 @@ public class Spawner2 : MonoBehaviour
         while (true) 
         {
             Instantiate(archer, spawnPoint.position, spawnPoint.rotation);
-
-            
             yield return new WaitForSeconds(spawnTime);
         }
     }
