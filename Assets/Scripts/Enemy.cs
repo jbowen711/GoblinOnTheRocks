@@ -13,9 +13,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
 
     public bool isMoving;
-    public float stopTimeInterval;
     private float timeTillMove;
-    public float moveTimeInterval;
     private float timeTillStop;
 
     public int health;
@@ -24,6 +22,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        float stopTimeInterval = Random.Range(1f, 3f);
         timeTillMove = stopTimeInterval;
         isMoving = true;
 
@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
             if(timeTillStop <= 0)
             {
                 isMoving = false;
+                float stopTimeInterval = Random.Range(1f, 3f);
                 timeTillMove = stopTimeInterval;
             }
             else 
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour
             if(timeTillMove <= 0)
             {
                 isMoving = true;
+                float moveTimeInterval = Random.Range(2f, 4f);
                 timeTillStop = moveTimeInterval;
             }
             else
