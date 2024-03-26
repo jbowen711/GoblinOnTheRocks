@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     private float timeTillMove;
     public float moveTimeInterval;
     private float timeTillStop;
+
+    public int health;
     
 
     void Start()
@@ -24,6 +26,8 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         timeTillMove = stopTimeInterval;
         isMoving = true;
+
+        health = 1;
     }
 
     void Update()
@@ -58,6 +62,19 @@ public class Enemy : MonoBehaviour
             {
                 moveDirection = facingDirection;
                 timeTillMove -= Time.deltaTime;
+            }
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "arrow")
+        {
+            Destroy(collision.gameObject);
+            health -= 1;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
             }
         }
     }
