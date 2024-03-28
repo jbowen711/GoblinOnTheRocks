@@ -223,9 +223,9 @@ MonoBehaviour:
   moveSpeed: 6
   isMoving: 0
   health: 0
-  shootInterval: 5
+  shootInterval: 4
   arrow: {fileID: 1293358079489391039, guid: 8d2e73319b4ed4ce790f31fbf6b95eaa, type: 3}
-  arrowSpeed: 10
+  arrowSpeed: 9
   arrowSpawn: {fileID: 7484139224690751704}
 --- !u!4 &8722962339368149673 stripped
 Transform:
