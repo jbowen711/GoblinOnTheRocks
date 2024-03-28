@@ -16,8 +16,14 @@ public class Enemy : MonoBehaviour
     private float timeTillMove;
     private float timeTillStop;
 
+
     public int health;
-    
+
+    public float shootInterval = 8f;
+    private float timer = 0f;
+    [SerializeField] GameObject arrow;
+    public float arrowSpeed = 50f;
+    public Transform arrowSpawn;
 
     void Start()
     {
@@ -32,6 +38,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        
         // enemy faces player
         facingDirection = player.transform.position - transform.position;
         float angle = Mathf.Atan2(facingDirection.x, facingDirection.z) * Mathf.Rad2Deg;
@@ -64,20 +71,63 @@ public class Enemy : MonoBehaviour
             {
                 moveDirection = facingDirection;
                 timeTillMove -= Time.deltaTime;
+                if (timeTillMove == 1.0f)
+                {
+                    FireArrow();
+                }
             }
+        }
+
+
+        timer += Time.deltaTime;
+        if (timer >= shootInterval)
+        {
+            FireArrow();
+            timer = 0f;
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    /*public void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.tag == "arrow")
         {
+            Debug.Log("Collided");
             Destroy(collision.gameObject);
             health -= 1;
             if (health <= 0)
             {
                 Destroy(gameObject);
             }
+        }
+    }*/
+
+    /*public void FireArrow()
+    {
+        Instantiate(arrow, arrowSpawn.position, Quaternion.identity);
+        Rigidbody arrowRb = arrow.GetComponent<Rigidbody>();
+        if (arrowRb != null)
+        {
+            Debug.Log("ArrowMove");
+            Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;
+            arrow.transform.rotation = Quaternion.LookRotation(direction);
+            arrowRb.velocity = direction * arrowSpeed;
+        }
+        
+    }
+    */
+    public void FireArrow()
+    {
+        GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
+        
+        Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
+
+        if (arrowRb != null)
+        {
+            Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;
+            //arrowClone.transform.rotation = Quaternion.LookRotation(direction);
+            arrowRb.AddForce(direction * arrowSpeed, ForceMode.VelocityChange);
+
         }
     }
 }
