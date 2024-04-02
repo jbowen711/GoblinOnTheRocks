@@ -17,11 +17,14 @@ public class Player : MonoBehaviour
     public Transform orientation;
 
     public ParticleSystem runTrail;
+    public ParticleSystem boostTrail;
+
 
 
     void Start()
     {
-       
+        runTrail.Play();
+
     }
 
     void Update()
@@ -39,11 +42,7 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * boostPower, ForceMode.Impulse);
             //TODO: Particles On Dash
-            runTrail.Play();
-        }
-        else
-        {
-
+            boostTrail.Play();
         }
 
         //Orientation of facing diection
@@ -52,6 +51,20 @@ public class Player : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
+
+
+        // why does this not work
+
+        // // play run trail while moving
+        // if (rb.velocity.magnitude > 0f)
+        // {
+        //     Debug.Log("hi");
+        //     runTrail.Play();
+        // }
+        // else
+        // {
+        //     runTrail.Stop();
+        // }
 
     }
 }
