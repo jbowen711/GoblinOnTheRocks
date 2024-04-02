@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
 
     public Transform orientation;
 
+    public ParticleSystem runTrail;
+
+
     void Start()
     {
        
@@ -36,6 +39,10 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * boostPower, ForceMode.Impulse);
             //TODO: Particles On Dash
+            runTrail.Play();
+        }
+        else
+        {
 
         }
 
