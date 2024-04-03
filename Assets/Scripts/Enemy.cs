@@ -38,52 +38,55 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if(player != null)
+        {
         
-        // enemy faces player
-        facingDirection = player.transform.position - transform.position;
-        float angle = Mathf.Atan2(facingDirection.x, facingDirection.z) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
- 
-        // enemy moves and stops on a timed interval
-        if(isMoving)
-        {
-            if(timeTillStop <= 0)
+            // enemy faces player
+            facingDirection = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(facingDirection.x, facingDirection.z) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+    
+            // enemy moves and stops on a timed interval
+            if(isMoving)
             {
-                isMoving = false;
-                float stopTimeInterval = Random.Range(1f, 3f);
-                timeTillMove = stopTimeInterval;
-            }
-            else 
-            {
-                rb.velocity = moveDirection.normalized * moveSpeed;
-                timeTillStop -= Time.deltaTime;
-            }
-        }
-        else
-        {
-            if(timeTillMove <= 0)
-            {
-                isMoving = true;
-                float moveTimeInterval = Random.Range(2f, 4f);
-                timeTillStop = moveTimeInterval;
+                if(timeTillStop <= 0)
+                {
+                    isMoving = false;
+                    float stopTimeInterval = Random.Range(1f, 3f);
+                    timeTillMove = stopTimeInterval;
+                }
+                else 
+                {
+                    rb.velocity = moveDirection.normalized * moveSpeed;
+                    timeTillStop -= Time.deltaTime;
+                }
             }
             else
             {
-                moveDirection = facingDirection;
-                timeTillMove -= Time.deltaTime;
-                if (timeTillMove == 1.0f)
+                if(timeTillMove <= 0)
                 {
-                    FireArrow();
+                    isMoving = true;
+                    float moveTimeInterval = Random.Range(2f, 4f);
+                    timeTillStop = moveTimeInterval;
+                }
+                else
+                {
+                    moveDirection = facingDirection;
+                    timeTillMove -= Time.deltaTime;
+                    if (timeTillMove == 1.0f)
+                    {
+                        FireArrow();
+                    }
                 }
             }
-        }
 
 
-        timer += Time.deltaTime;
-        if (timer >= shootInterval)
-        {
-            FireArrow();
-            timer = 0f;
+            timer += Time.deltaTime;
+            if (timer >= shootInterval)
+            {
+                FireArrow();
+                timer = 0f;
+            }
         }
     }
 

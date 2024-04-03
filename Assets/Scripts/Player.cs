@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        runTrail.Play();
 
     }
 
@@ -51,20 +50,27 @@ public class Player : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
-
+                
 
         // why does this not work
 
-        // // play run trail while moving
-        // if (rb.velocity.magnitude > 0f)
-        // {
-        //     Debug.Log("hi");
-        //     runTrail.Play();
-        // }
-        // else
-        // {
-        //     runTrail.Stop();
-        // }
+        // play run trail while moving
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            if (!runTrail.isPlaying)
+            {
+                Debug.Log("moving");
+                runTrail.Play();
+            }
+        }
+        else
+        {
+            if (runTrail.isPlaying)
+            {
+                Debug.Log("not moving");
+                runTrail.Stop();
+            }
+        }
 
     }
 }

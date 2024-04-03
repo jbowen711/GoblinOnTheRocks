@@ -11094,6 +11094,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7464135690792784802, guid: 174f77ef5b8f24ca4a76d46f6edd98df,
         type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464135690792784802, guid: 174f77ef5b8f24ca4a76d46f6edd98df,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464135690792784802, guid: 174f77ef5b8f24ca4a76d46f6edd98df,
+        type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 2
       objectReference: {fileID: 0}
