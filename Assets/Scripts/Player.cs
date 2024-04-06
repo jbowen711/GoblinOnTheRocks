@@ -19,15 +19,15 @@ public class Player : MonoBehaviour
     public ParticleSystem runTrail;
     public ParticleSystem boostTrail;
 
-
+    public int score;
 
     void Start()
     {
-
+        score = 0;
     }
 
     void Update()
-    {
+    {        
         //Get Player Input Horizontal and Vertical
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         {
             if (!runTrail.isPlaying)
             {
-                Debug.Log("moving");
                 runTrail.Play();
             }
         }
@@ -67,10 +66,13 @@ public class Player : MonoBehaviour
         {
             if (runTrail.isPlaying)
             {
-                Debug.Log("not moving");
                 runTrail.Stop();
             }
         }
+    }
 
+    public void Score()
+    {
+        score += 1;        
     }
 }

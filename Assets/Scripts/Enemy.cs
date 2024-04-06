@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     private float timeTillMove;
     private float timeTillStop;
 
-
     public int health;
 
     public float shootInterval = 8f;
@@ -97,20 +96,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /*public void OnCollisionEnter(Collision collision)
-    {
-        
-        if (collision.gameObject.tag == "arrow")
-        {
-            Debug.Log("Collided");
-            Destroy(collision.gameObject);
-            health -= 1;
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }*/
 
     /*public void FireArrow()
     {

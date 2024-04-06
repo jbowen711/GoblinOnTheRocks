@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowDamage: 10
+  player: {fileID: 7578568149943463593, guid: 174f77ef5b8f24ca4a76d46f6edd98df, type: 3}
 --- !u!54 &943864387541886513
 Rigidbody:
   m_ObjectHideFlags: 0
