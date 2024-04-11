@@ -9,19 +9,26 @@ public class Spawner : MonoBehaviour
     //Spawn variables
     public GameObject archer;
     public Transform spawnPoint; 
-    [SerializeField] float spawnTime = 10f; 
+    public float spawnTime;
+    [SerializeField] float initialSpawnTime = 10f;
+    [SerializeField] float minSpawnTime = 2f;
+    [SerializeField] float spawnTimeDecreaseRate = 0.6f;
 
     private void Start()
     {
+        spawnTime = initialSpawnTime;
         StartCoroutine(SpawnObjects());
     }
 
     IEnumerator SpawnObjects()
     {
-        while (true) //Infinte Spawning - could slow down if there are too many
+        while (true) // Infinite Spawning - could slow down if there are too many
         {
-            //Instantiate spawner at spawnposition
+            // Instantiate spawner at spawn position
             Instantiate(archer, spawnPoint.position, spawnPoint.rotation);
+
+            // Decrease spawn time
+            spawnTime = Mathf.Max(minSpawnTime, spawnTime - spawnTimeDecreaseRate);
 
             // Wait Spawn time
             yield return new WaitForSeconds(spawnTime);

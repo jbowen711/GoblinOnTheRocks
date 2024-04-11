@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UIElements;
 
 public class playerHealth : MonoBehaviour
 {
 
     public int maxHealth = 5;
     public int health;
-    
+
+    [SerializeField]
+    public GameObject[] hearts;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +34,13 @@ public class playerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i >= health)
+            {
+                hearts[i].SetActive(false);
+            }
+        }
 
     }
 
