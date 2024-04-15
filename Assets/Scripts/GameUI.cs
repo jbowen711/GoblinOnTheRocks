@@ -7,8 +7,6 @@ using System.Runtime.CompilerServices;
 
 public class GameUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     [SerializeField]
     private TMP_Text scoreValue;
 
@@ -16,20 +14,19 @@ public class GameUI : MonoBehaviour
 
     [SerializeField]
     public GameObject player;
-    void Start()
-    {
-        
 
-        
+    void Start()
+    {     
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        score = player.GetComponent<Player>().score;
-        string scoreText = score.ToString();
-        scoreValue.SetText(scoreText);
+        if (player != null)
+        {
+            score = player.GetComponent<Player>().score;
+            string scoreText = score.ToString();
+            scoreValue.SetText(scoreText);
+        }
 
     }
 }

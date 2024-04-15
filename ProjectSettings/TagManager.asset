@@ -9,6 +9,7 @@ TagManager:
   - spike
   - arrow
   - enemy
+  - TauntIcon
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Obstacles
-  - 
+  - Arrow
   - 
   - 
   - 

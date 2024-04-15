@@ -51,9 +51,6 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
                 
-
-        // why does this not work
-
         // play run trail while moving
         if (horizontalInput != 0 || verticalInput != 0)
         {

@@ -17,6 +17,10 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private Rigidbody arrowRb;
 
+    public GameObject blood;
+    public Transform bloodSpawn;
+
+
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -54,7 +58,6 @@ public class Projectile : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            // Players health goes down
             if (isMoving && arrowRb.velocity.magnitude > 0.5f)
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -64,26 +67,27 @@ public class Projectile : MonoBehaviour
                     playerHealth ph = player.GetComponent<playerHealth>();
                     ph.TakeDamage(arrowDamage);
                 }
-
+                
                 Destroy(gameObject);
+
             }
         }
         else if (collision.collider.CompareTag("enemy"))
         {
+            Quaternion rot = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            Instantiate(blood, bloodSpawn.position, rot);
+
+
             playerScript.Score();
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            
-
         }
         else if (collision.collider.CompareTag("arrow"))
         {
             //Destroy(gameObject);
         }
         else
-        {
-            
-            
+        {         
             Rigidbody arrowRb = GetComponent<Rigidbody>();
             arrowRb.velocity = Vector3.zero;
             arrowCollider.enabled = false;
