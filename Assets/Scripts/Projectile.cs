@@ -20,6 +20,8 @@ public class Projectile : MonoBehaviour
     public GameObject blood;
     public Transform bloodSpawn;
 
+    public AudioSource aS;
+    public AudioClip enermydeath;
 
     void Start()
     {
@@ -79,7 +81,7 @@ public class Projectile : MonoBehaviour
         {
             Quaternion rot = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             Instantiate(blood, bloodSpawn.position, rot);
-
+            aS.PlayOneShot(enermydeath);
 
             playerScript.Score();
             Destroy(collision.gameObject);

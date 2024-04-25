@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
 
     public int score;
 
+    public AudioSource aS;
+    public AudioClip boostSound;
+
+
     void Start()
     {
         score = 0;
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
             rb.AddForce(moveDirection.normalized * boostPower, ForceMode.Impulse);
             //TODO: Particles On Dash
             boostTrail.Play();
+            aS.PlayOneShot(boostSound);
             timeTillBoost = boostRate;
         }
         timeTillBoost -= 0.1f;

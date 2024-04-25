@@ -29,6 +29,10 @@ public class Enemy : MonoBehaviour
     public GameObject tauntIcon;
 
     public ParticleSystem runTrail;
+    public AudioSource aS;
+    public AudioClip taunt;
+    public AudioSource aS2;
+    public AudioClip arrowfire;
 
     void Start()
     {
@@ -111,6 +115,7 @@ public class Enemy : MonoBehaviour
     {
         GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
         Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
+        aS2.PlayOneShot(arrowfire);
 
         if (arrowRb != null)
         {
@@ -123,6 +128,7 @@ public class Enemy : MonoBehaviour
     {    
         GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
         Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
+        aS2.PlayOneShot(arrowfire);
 
         if (arrowRb != null)
         {
@@ -135,6 +141,7 @@ public class Enemy : MonoBehaviour
 
             // Add force to the arrow clone to make it move in the randomized direction
             arrowRb.AddForce(direction * arrowSpeed, ForceMode.VelocityChange);
+            
         }
     }
 
@@ -144,6 +151,7 @@ public class Enemy : MonoBehaviour
         Taunt();
         tauntIcon.SetActive(true);
         StartCoroutine(TauntIconHide());
+        aS.PlayOneShot(taunt);
     }
 
     public void Taunt()
