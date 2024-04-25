@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 057df1dfdeb2640bfa2e88fc0ab0e22d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.15
+      value: 1.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 057df1dfdeb2640bfa2e88fc0ab0e22d,
         type: 3}
@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 057df1dfdeb2640bfa2e88fc0ab0e22d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.8
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 057df1dfdeb2640bfa2e88fc0ab0e22d,
         type: 3}
@@ -4202,6 +4202,7 @@ MonoBehaviour:
   orientation: {fileID: 0}
   runTrail: {fileID: 7464135690792784802}
   boostTrail: {fileID: 8728905520721365933}
+  boostRate: 15
   score: 0
 --- !u!111 &3956279791336381439
 Animation:
@@ -4255,6 +4256,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   health: 0
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &4206746342352209384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 057df1dfdeb2640bfa2e88fc0ab0e22d,
@@ -4288,7 +4295,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 31771ad55a9514e269fce0ec0e8a9243, type: 2}
+      objectReference: {fileID: 2100000, guid: cd2979ad70b144b8fabdf48144932a46, type: 2}
     - target: {fileID: 3347995106102685539, guid: e49de6df9a9a74a9685ed22bbbf7cc9a,
         type: 3}
       propertyPath: lengthInSec
@@ -4498,7 +4505,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 31771ad55a9514e269fce0ec0e8a9243, type: 2}
+      objectReference: {fileID: 2100000, guid: cd2979ad70b144b8fabdf48144932a46, type: 2}
     - target: {fileID: 3347995106102685539, guid: e49de6df9a9a74a9685ed22bbbf7cc9a,
         type: 3}
       propertyPath: looping

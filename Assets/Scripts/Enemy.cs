@@ -34,12 +34,13 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        tauntIcon = GameObject.FindGameObjectWithTag("TauntIcon");
         tauntIcon.SetActive(false);
 
-        // float stopTimeInterval = Random.Range(1f, 3f);
-        timeTillMove = 0;
+        // timeTillMove = 0;
         isMoving = true;
+        timeTillStop = Random.Range(5f,10f);
+        // float moveTimeInterval = Random.Range(2f, 4f);
+        // timeTillStop = moveTimeInterval;
 
         health = 1;
     }
@@ -48,6 +49,9 @@ public class Enemy : MonoBehaviour
     {
         if (player != null)
         {
+            Debug.Log("IsMoving: " + isMoving);
+            Debug.Log("TimeTillStop: " + timeTillStop);
+
 
             // enemy faces player
             facingDirection = player.transform.position - transform.position;
@@ -57,6 +61,7 @@ public class Enemy : MonoBehaviour
             // enemy moves and stops on a timed interval
             if (isMoving)
             {
+                Debug.Log("isMoving");
                 if (timeTillStop <= 0)
                 {
                     isMoving = false;
@@ -66,7 +71,8 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    
+                    Debug.Log("movement");
+                    moveDirection = facingDirection;
                     rb.velocity = moveDirection.normalized * moveSpeed;
                     timeTillStop -= Time.deltaTime;
                 }
