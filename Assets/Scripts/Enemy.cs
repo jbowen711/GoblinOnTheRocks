@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour
     public float tauntCooldown = 5f;
     public GameObject tauntIcon;
 
+    public ParticleSystem runTrail;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -60,9 +62,11 @@ public class Enemy : MonoBehaviour
                     isMoving = false;
                     float stopTimeInterval = Random.Range(1f, 3f);
                     timeTillMove = stopTimeInterval;
+                    
                 }
                 else
                 {
+                    
                     rb.velocity = moveDirection.normalized * moveSpeed;
                     timeTillStop -= Time.deltaTime;
                 }
