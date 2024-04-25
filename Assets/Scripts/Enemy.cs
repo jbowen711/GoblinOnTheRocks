@@ -24,7 +24,6 @@ public class Enemy : MonoBehaviour
     public float arrowSpeed = 45f;
     public Transform arrowSpawn;
 
-
     public bool canTaunt;
     public float tauntCooldown = 5f;
     public GameObject tauntIcon;
@@ -36,22 +35,17 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         tauntIcon.SetActive(false);
 
-        // timeTillMove = 0;
-        isMoving = true;
-        timeTillStop = Random.Range(5f,10f);
-        // float moveTimeInterval = Random.Range(2f, 4f);
-        // timeTillStop = moveTimeInterval;
+        isMoving = false;
+        timeTillMove = Random.Range(0f,.9f);
 
         health = 1;
+
     }
 
     void Update()
     {
         if (player != null)
         {
-            Debug.Log("IsMoving: " + isMoving);
-            Debug.Log("TimeTillStop: " + timeTillStop);
-
 
             // enemy faces player
             facingDirection = player.transform.position - transform.position;
@@ -61,18 +55,22 @@ public class Enemy : MonoBehaviour
             // enemy moves and stops on a timed interval
             if (isMoving)
             {
-                Debug.Log("isMoving");
                 if (timeTillStop <= 0)
                 {
                     isMoving = false;
                     float stopTimeInterval = Random.Range(1f, 3f);
                     timeTillMove = stopTimeInterval;
+                    runTrail.Stop();
                     
                 }
                 else
-                {
-                    Debug.Log("movement");
-                    moveDirection = facingDirection;
+                {   
+                    if(moveDirection == Vector3.zero)
+                    {
+                        float randomAngle = Random.Range(-65f, 65f);
+                        Quaternion randomRotation = Quaternion.Euler(0f, randomAngle, 0f);
+                        moveDirection = randomRotation * facingDirection;
+                    }
                     rb.velocity = moveDirection.normalized * moveSpeed;
                     timeTillStop -= Time.deltaTime;
                 }
@@ -84,10 +82,11 @@ public class Enemy : MonoBehaviour
                     isMoving = true;
                     float moveTimeInterval = Random.Range(2f, 4f);
                     timeTillStop = moveTimeInterval;
+                    runTrail.Play();
+
                 }
                 else
                 {
-                    moveDirection = facingDirection;
                     timeTillMove -= Time.deltaTime;
                     if (timeTillMove == 1.0f)
                     {
@@ -96,11 +95,14 @@ public class Enemy : MonoBehaviour
                 }
             }
 
-
             timer += Time.deltaTime;
             if (timer >= shootInterval)
             {
-                FireArrow();
+                float rand = Random.Range(0f,2f);
+                if (rand >= 1)
+                {
+                    FireArrow();
+                }
                 timer = 0f;
             }
         }
