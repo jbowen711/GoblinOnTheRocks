@@ -35,8 +35,8 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         tauntIcon.SetActive(false);
 
-        isMoving = false;
-        timeTillMove = Random.Range(0f,.9f);
+        isMoving = true;
+        timeTillStop = Random.Range(2f,4f);
 
         health = 1;
 
@@ -60,14 +60,13 @@ public class Enemy : MonoBehaviour
                     isMoving = false;
                     float stopTimeInterval = Random.Range(1f, 3f);
                     timeTillMove = stopTimeInterval;
-                    runTrail.Stop();
-                    
+                    runTrail.Stop(); 
                 }
                 else
                 {   
                     if(moveDirection == Vector3.zero)
                     {
-                        float randomAngle = Random.Range(-65f, 65f);
+                        float randomAngle = Random.Range(-25f, 25f);
                         Quaternion randomRotation = Quaternion.Euler(0f, randomAngle, 0f);
                         moveDirection = randomRotation * facingDirection;
                     }
@@ -83,10 +82,10 @@ public class Enemy : MonoBehaviour
                     float moveTimeInterval = Random.Range(2f, 4f);
                     timeTillStop = moveTimeInterval;
                     runTrail.Play();
-
                 }
                 else
                 {
+                    moveDirection = facingDirection;
                     timeTillMove -= Time.deltaTime;
                     if (timeTillMove == 1.0f)
                     {
@@ -108,41 +107,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
-    /*public void FireArrow()
-    {
-        Instantiate(arrow, arrowSpawn.position, Quaternion.identity);
-        Rigidbody arrowRb = arrow.GetComponent<Rigidbody>();
-        if (arrowRb != null)
-        {
-            Debug.Log("ArrowMove");
-            Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;
-            arrow.transform.rotation = Quaternion.LookRotation(direction);
-            arrowRb.velocity = direction * arrowSpeed;
-        }
-        
-    }
-    */
     public void FireArrow()
     {
         GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
-
         Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
 
         if (arrowRb != null)
         {
-            Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;
-            
+            Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;     
             arrowRb.AddForce(direction * arrowSpeed, ForceMode.VelocityChange);
-
         }
     }
 
     public void TauntFireArrow()
-    {
-        
+    {    
         GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
-
         Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
 
         if (arrowRb != null)
@@ -165,15 +144,12 @@ public class Enemy : MonoBehaviour
         Taunt();
         tauntIcon.SetActive(true);
         StartCoroutine(TauntIconHide());
-
     }
-
 
     public void Taunt()
     {
         StartCoroutine(TauntDelayed(0.3f)); 
     }
-
 
     IEnumerator TauntDelayed(float delay)
     {
