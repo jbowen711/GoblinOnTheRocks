@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 3635720980197635481, guid: baa9fa060535e1c42a0a177cd3f60bda,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3635720980197635481, guid: baa9fa060535e1c42a0a177cd3f60bda,
         type: 3}
@@ -345,17 +345,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 50d45b337270543e789de775575919fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2032696
+      value: 2.9723902
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50d45b337270543e789de775575919fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50d45b337270543e789de775575919fe,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.96
+      value: 3.157195
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50d45b337270543e789de775575919fe,
         type: 3}
@@ -526,6 +526,7 @@ MonoBehaviour:
   canTaunt: 0
   tauntCooldown: 5
   tauntIcon: {fileID: 0}
+  runTrail: {fileID: 0}
 --- !u!4 &8722962339368149673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 50d45b337270543e789de775575919fe,

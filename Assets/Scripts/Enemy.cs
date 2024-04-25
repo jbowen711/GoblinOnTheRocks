@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     public float shootInterval = 8f;
     private float timer = 0f;
     [SerializeField] GameObject arrow;
-    public float arrowSpeed = 50f;
+    public float arrowSpeed = 45f;
     public Transform arrowSpawn;
 
 
@@ -37,8 +37,8 @@ public class Enemy : MonoBehaviour
         tauntIcon = GameObject.FindGameObjectWithTag("TauntIcon");
         tauntIcon.SetActive(false);
 
-        float stopTimeInterval = Random.Range(1f, 3f);
-        timeTillMove = stopTimeInterval;
+        // float stopTimeInterval = Random.Range(1f, 3f);
+        timeTillMove = 0;
         isMoving = true;
 
         health = 1;
