@@ -24,7 +24,10 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<Player>();
+        if(player != null)
+        {
+            playerScript = player.GetComponent<Player>();
+        }
         arrowRb = GetComponent<Rigidbody>();
 
         if (player != null)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
 
 public class playerHealth : MonoBehaviour
 {
@@ -45,6 +47,8 @@ public class playerHealth : MonoBehaviour
     }
 
     public void Die() {
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex - 1);    
     }
 }
