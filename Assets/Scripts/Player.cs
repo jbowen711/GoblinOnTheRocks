@@ -19,11 +19,15 @@ public class Player : MonoBehaviour
     public ParticleSystem runTrail;
     public ParticleSystem boostTrail;
 
+    public float boostRate;
+    private float timeTillBoost;
+
     public int score;
 
     void Start()
     {
         score = 0;
+        timeTillBoost = boostRate;
     }
 
     void Update()
@@ -37,12 +41,14 @@ public class Player : MonoBehaviour
         rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
 
         //Dash using boostPower in movementDirection
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && (timeTillBoost <= 0))
         {
             rb.AddForce(moveDirection.normalized * boostPower, ForceMode.Impulse);
             //TODO: Particles On Dash
             boostTrail.Play();
+            timeTillBoost = boostRate;
         }
+        timeTillBoost -= 0.1f;
 
         //Orientation of facing diection
         if (moveDirection != Vector3.zero)

@@ -12033,6 +12033,11 @@ PrefabInstance:
       objectReference: {fileID: 1788456671}
     - target: {fileID: 7578568149943463593, guid: 174f77ef5b8f24ca4a76d46f6edd98df,
         type: 3}
+      propertyPath: boostRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578568149943463593, guid: 174f77ef5b8f24ca4a76d46f6edd98df,
+        type: 3}
       propertyPath: orientation
       value: 
       objectReference: {fileID: 397943148}
