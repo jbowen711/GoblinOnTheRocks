@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 8975932691212228641}
   - component: {fileID: 904048382578387739}
   - component: {fileID: 3813168904904514054}
-  - component: {fileID: 3433542815242994467}
   m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
@@ -115,29 +114,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3433542815242994467
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941995330822576132}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.50000036
-  m_Height: 2.0000012
-  m_Direction: 1
-  m_Center: {x: 0.00000041723277, y: -0.00000017881405, z: -0.00000008940697}
 --- !u!1 &6058240200973934654
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,8 +533,7 @@ MonoBehaviour:
   arrowRb: {fileID: 943864387541886513}
   blood: {fileID: 742998378045347717, guid: cadc3ba714afe4d878492f80d62780d8, type: 3}
   bloodSpawn: {fileID: 6257650079218953564}
-  aS: {fileID: 3162159878658336376}
-  enermydeath: {fileID: 8300000, guid: 13e1e1ccdb506bd4aa6bd3f329bc9e4a, type: 3}
+  arrowChildTransform: {fileID: 3599293049373140905}
 --- !u!54 &943864387541886513
 Rigidbody:
   m_ObjectHideFlags: 0

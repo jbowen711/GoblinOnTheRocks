@@ -19,14 +19,19 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);    
     }
 
+    // when press "How To Play" Button
     public void HowToPlay()
     {
+        // disable start menu buttons
         menuCanvas.gameObject.SetActive(false);
+        // enable tutorial canvas
         howToPlayCanvas.gameObject.SetActive(true);
+        // get rid of trees
         tree1.gameObject.SetActive(false);
         tree2.gameObject.SetActive(false);
         tree3.gameObject.SetActive(false);
@@ -35,17 +40,25 @@ public class Menu : MonoBehaviour
 
     }
 
+
+    // when press "Credits" Button
     public void Credits()
     {
+        // disable start menu buttons
         menuCanvas.gameObject.SetActive(false);
+        // enable credits canvas
         creditsCanvas.gameObject.SetActive(true);
     }
 
+    // when press "Return" Button
     public void Return()
     {
+        // enable menu buttons
         menuCanvas.gameObject.SetActive(true);
+        // disable tutorial canvas
         howToPlayCanvas.gameObject.SetActive(false);
         creditsCanvas.gameObject.SetActive(false);
+        // bring back trees
         tree1.gameObject.SetActive(true);
         tree2.gameObject.SetActive(true);
         tree3.gameObject.SetActive(true);
@@ -55,6 +68,7 @@ public class Menu : MonoBehaviour
 
     public void Quit()
     {
+        Application.Quit();
         
     }
 

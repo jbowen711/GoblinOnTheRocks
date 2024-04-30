@@ -57,10 +57,13 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // enemy moves and stops on a timed interval
+
+            // after timeTillMove hits 0
             if (isMoving)
             {
                 if (timeTillStop <= 0)
                 {
+                    // switch to not moving
                     isMoving = false;
                     float stopTimeInterval = Random.Range(1f, 3f);
                     timeTillMove = stopTimeInterval;
@@ -70,18 +73,22 @@ public class Enemy : MonoBehaviour
                 {   
                     if(moveDirection == Vector3.zero)
                     {
+                        // mave the move direction randomized within a 50 degree range
                         float randomAngle = Random.Range(-25f, 25f);
                         Quaternion randomRotation = Quaternion.Euler(0f, randomAngle, 0f);
                         moveDirection = randomRotation * facingDirection;
                     }
+                    // move enemy
                     rb.velocity = moveDirection.normalized * moveSpeed;
                     timeTillStop -= Time.deltaTime;
                 }
             }
+            //after timeTillStop hits 0 
             else
             {
                 if (timeTillMove <= 0)
                 {
+                    // switch to is moving
                     isMoving = true;
                     float moveTimeInterval = Random.Range(2f, 4f);
                     timeTillStop = moveTimeInterval;
@@ -89,8 +96,10 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
+                    // face player while stopped
                     moveDirection = facingDirection;
                     timeTillMove -= Time.deltaTime;
+                    // shoot arrow one second before move
                     if (timeTillMove == 1.0f)
                     {
                         FireArrow();
@@ -98,9 +107,11 @@ public class Enemy : MonoBehaviour
                 }
             }
 
+            
             timer += Time.deltaTime;
             if (timer >= shootInterval)
             {
+                //Random fire arrow
                 float rand = Random.Range(0f,2f);
                 if (rand >= 1)
                 {
@@ -113,12 +124,15 @@ public class Enemy : MonoBehaviour
 
     public void FireArrow()
     {
+        //Instantiate arrow at arrow spawn position(child of enemy)
         GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
         Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
+        //play fire sound
         aS2.PlayOneShot(arrowfire);
 
         if (arrowRb != null)
         {
+            //Set direction and add rb force in direction
             Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;     
             arrowRb.AddForce(direction * arrowSpeed, ForceMode.VelocityChange);
         }
@@ -126,20 +140,21 @@ public class Enemy : MonoBehaviour
 
     public void TauntFireArrow()
     {    
+        //Instantiate arrow
         GameObject arrowClone = Instantiate(arrow, arrowSpawn.position, arrowSpawn.transform.rotation);
         Rigidbody arrowRb = arrowClone.GetComponent<Rigidbody>();
         aS2.PlayOneShot(arrowfire);
 
         if (arrowRb != null)
         {
-            // Calculate the initial direction towards the player
+            // Calculate direction
             Vector3 direction = (player.transform.position - arrowSpawn.position).normalized;
 
-            // Apply a random spread to the direction vector
+            // Add random angle spread to arrow
             float spreadAngle = Random.Range(-15f, 15f);
             direction = Quaternion.Euler(0f, spreadAngle, 0f) * direction;
 
-            // Add force to the arrow clone to make it move in the randomized direction
+            // Add force in target direction
             arrowRb.AddForce(direction * arrowSpeed, ForceMode.VelocityChange);
             
         }
@@ -147,20 +162,26 @@ public class Enemy : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //Taunt abiliy - use coroutine as timer
         StartCoroutine(TauntCooldown());
         Taunt();
+        //Set taunt icon to true - child of parent enemy
         tauntIcon.SetActive(true);
+        //Courouine countdown to hide icon
         StartCoroutine(TauntIconHide());
+        //play taunt sound "hehehe"
         aS.PlayOneShot(taunt);
     }
 
     public void Taunt()
     {
+        //Taunt delay
         StartCoroutine(TauntDelayed(0.3f)); 
     }
 
     IEnumerator TauntDelayed(float delay)
     {
+        //Loop for multiple arrows - slight delay in between taunt fires
         for (int i = 0; i < 8; i++)
         {
             TauntFireArrow();
@@ -169,12 +190,14 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator TauntCooldown()
     {
+        //Taunt cooldown
         canTaunt = false;
         yield return new WaitForSeconds(tauntCooldown);
         canTaunt = true;
     }
     IEnumerator TauntIconHide()
     {
+        //Hide icon after 2f
         yield return new WaitForSeconds(2f);
         tauntIcon.SetActive(false);
     }

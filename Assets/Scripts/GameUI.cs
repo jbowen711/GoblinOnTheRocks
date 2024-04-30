@@ -9,6 +9,7 @@ public class GameUI : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text scoreValue;
+    //TextMesh Pro score
 
     private int score;
 
@@ -23,6 +24,7 @@ public class GameUI : MonoBehaviour
     {
         if (player != null)
         {
+            //Update score
             score = player.GetComponent<Player>().score;
             string scoreText = score.ToString();
             scoreValue.SetText(scoreText);

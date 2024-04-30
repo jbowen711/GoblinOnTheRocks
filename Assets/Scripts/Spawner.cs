@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
-    //First Spawner - Front
+    //Front and Back Spanwers
     //Spawn variables
     public GameObject archer;
     public Transform spawnPoint; 
@@ -16,7 +16,9 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        //Set Spawn Time
         spawnTime = initialSpawnTime;
+        //StartCoroutine on Start
         StartCoroutine(SpawnObjects());
     }
 
@@ -30,7 +32,7 @@ public class Spawner : MonoBehaviour
             // Decrease spawn time
             spawnTime = Mathf.Max(minSpawnTime, spawnTime - spawnTimeDecreaseRate);
 
-            // Wait Spawn time
+            // Return wait time
             yield return new WaitForSeconds(spawnTime);
         }
     }

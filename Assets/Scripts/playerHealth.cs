@@ -9,23 +9,23 @@ using UnityEngine.SceneManagement;
 public class playerHealth : MonoBehaviour
 {
 
+    //Player Health variables
     public int maxHealth = 5;
     public int health;
 
+    //Hearts UI
     [SerializeField]
     public GameObject[] hearts;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         
         health = maxHealth;
     }
-
-    // Update is called once per frame
     void Update()
     {
+        //No Health = death 
         if (health <= 0)
         {
             Die();
@@ -35,6 +35,8 @@ public class playerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+
+        //Take damage function - remove one heart from array
         health -= damage;
         for (int i = 0; i < hearts.Length; i++)
         {
@@ -47,7 +49,7 @@ public class playerHealth : MonoBehaviour
     }
 
     public void Die() {
-        // Destroy(gameObject);
+        // Go back to menu screen
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex - 1);    
     }

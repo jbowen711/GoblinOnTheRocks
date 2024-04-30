@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     
+    //Player variables
     public Rigidbody rb;
     public float moveSpeed;
     public float boostPower;
@@ -16,14 +17,17 @@ public class Player : MonoBehaviour
 
     public Transform orientation;
 
-    public ParticleSystem runTrail;
-    public ParticleSystem boostTrail;
 
     public float boostRate;
     private float timeTillBoost;
 
     public int score;
 
+    //Particles
+    public ParticleSystem runTrail;
+    public ParticleSystem boostTrail;
+
+    //Audio
     public AudioSource aS;
     public AudioClip boostSound;
 
@@ -48,7 +52,6 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && (timeTillBoost <= 0))
         {
             rb.AddForce(moveDirection.normalized * boostPower, ForceMode.Impulse);
-            //TODO: Particles On Dash
             boostTrail.Play();
             aS.PlayOneShot(boostSound);
             timeTillBoost = boostRate;
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
                 
-        // play run trail while moving
+        //Play run trail while moving
         if (horizontalInput != 0 || verticalInput != 0)
         {
             if (!runTrail.isPlaying)
@@ -79,6 +82,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Player score increase
     public void Score()
     {
         score += 1;        
